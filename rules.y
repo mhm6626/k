@@ -58,9 +58,47 @@ type : INT
 	| DOUBLE
 	| BOOL
 
-# block
+# Statements
 
-block : '{' ID '}'
+block : '{' statement_list_opt '}'
+
+statement_list_opt : statement_list
+	| empty
+
+statement_list : statement
+	| statement_list   statement
+
+statement: labeled_statement
+	| declaration_statement
+	| embedded_statement
+
+embedded_statement : block
+	| empty_statement
+	| expression_statement
+	| selection_statement
+	| iteration_statement
+	| jump_statement
+
+empty_statement : ';'
+
+labeled_statement : ID  ':'  statement
+
+
+declaration_statement : local_variable_declaration   ';'
+	| local_constant_declaration   ';'
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # other

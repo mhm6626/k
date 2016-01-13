@@ -16,7 +16,7 @@ reserved = (
 tokens = reserved + (
     'ID',
     )
-literals = ['+', '-', '*', '/', '(', ')', '.', ';', '{', '}']
+literals = ['+', '-', '*', '/', '(', ')', '.',',', ';', '{', '}']
 # Completely ignored characters
 t_ignore           = ' \t\x0c'
 

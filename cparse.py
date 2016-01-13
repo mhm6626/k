@@ -12,12 +12,12 @@ import ply.yacc as yacc
 tokens = clex.tokens
 
 
-
 def p_input(p):
     """
     input : namespace_declaration_opt  using_namespace_list_opt  function_declaration_list
     """
     pass
+
 
 ######################################
 # namespace
@@ -30,11 +30,13 @@ def p_namespace_declaration_opt(p):
     """
     pass
 
+
 def p_namespace_declaration(p):
     """
     namespace_declaration : NAMESPACE  qualified_identifier ';'
     """
     pass
+
 
 def p_qualified_identifier(p):
     """
@@ -43,12 +45,14 @@ def p_qualified_identifier(p):
     """
     pass
 
+
 def p_using_namespace_list_opt(p):
     """
     using_namespace_list_opt : using_namespace_list
         | empty
     """
     pass
+
 
 def p_using_namespace_list(p):
     """
@@ -57,11 +61,13 @@ def p_using_namespace_list(p):
     """
     pass
 
+
 def p_using_namespace(p):
     """
     using_namespace : USING  qualified_identifier ';'
     """
     pass
+
 
 ######################################
 # function
@@ -74,17 +80,20 @@ def p_function_declaration_list(p):
     """
     pass
 
+
 def p_function_declaration(p):
     """
     function_declaration : function_header   function_body
     """
     pass
 
+
 def p_function_header(p):
     """
     function_header :  function_modifier_opt  return_type  ID '(' fixed_parameters_opt ')'
     """
     pass
+
 
 def p_function_modifier_opt(p):
     """
@@ -93,12 +102,14 @@ def p_function_modifier_opt(p):
     """
     pass
 
+
 def p_function_modifier(p):
     """
     function_modifier : PUBLIC
         | PRIVATE
     """
     pass
+
 
 def p_return_type(p):
     """
@@ -107,12 +118,14 @@ def p_return_type(p):
     """
     pass
 
+
 def p_fixed_parameters_opt(p):
     """
     fixed_parameters_opt : fixed_parameters
         | empty
     """
     pass
+
 
 def p_fixed_parameters(p):
     """
@@ -121,17 +134,20 @@ def p_fixed_parameters(p):
     """
     pass
 
+
 def p_fixed_parameter(p):
     """
     fixed_parameter :  type  ID
     """
     pass
 
+
 def p_function_body(p):
     """
     function_body : block
     """
     pass
+
 
 ######################################
 # type
@@ -145,6 +161,7 @@ def p_type(p):
     """
     pass
 
+
 ######################################
 # block
 ###
@@ -154,6 +171,7 @@ def p_block(p):
     block : '{' ID '}'
     """
     pass
+
 
 ######################################
 # other
@@ -166,18 +184,20 @@ def p_empty(p):
     pass
 
 
-
 def p_error(t):
-    print("Whoa. We're hosed")
+    print(t)
+
 
 import profile
+
 # Build the grammar
 
-yacc.yacc()
-#yacc.yacc(method='LALR',write_tables=False,debug=True)
+parser = yacc.yacc()
+if __name__ == "__main__":
+    f = open(sys.argv[1], "r")
+    contents = f.read()
+    f.close()
+    parser.parse(contents)
+# yacc.yacc(method='LALR',write_tables=False,debug=True)
 
-#profile.run("yacc.yacc(method='LALR')")
-
-
-
-
+# profile.run("yacc.yacc(method='LALR')")

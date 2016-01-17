@@ -87,16 +87,61 @@ labeled_statement : ID  ':'  statement
 declaration_statement : local_variable_declaration   ';'
 	| local_constant_declaration   ';'
 
+local_variable_declaration : type   local_variable_declarators
+
+local_variable_declarators : local_variable_declarator
+	| local_variable_declarators   ','   local_variable_declarator
+
+local_variable_declarator : ID
+	| ID   '='   local_variable_initializer
+
+local_variable_initializer : expression
+	| array_initializer
+
+local_constant_declaration : const   type   constant_declarators
+
+constant_declarators : constant_declarator
+	| constant_declarators  ','   constant_declarator
+
+constant_declarator : ID   '='   constant_expression
 
 
+expression_statement : statement_expression   ';'
+
+statement_expression : invocation_expression
+	| object_creation_expression
+	| assignment
+	| post_increment_expression
+	| post_decrement_expression
+	| pre_increment_expression
+	| pre_decrement_expression
 
 
+selection_statement : if_statement
+	| switch_statement
 
+if_statement : IF '(' boolean_expression  ')'  embedded_statement
+	| if '(' boolean_expression ')' embedded_statement   else   embedded_statement
 
+boolean_expression : expression
 
+switch_statement : switch  '('  expression  ')' switch_block
 
+switch_block : '{' switch_sections_opt '}'
 
+switch_sections_opt : switch_sections
+	| empty
 
+switch_sections : switch_section
+	| switch_sections  switch_section
+
+switch_section : switch_labels   statement_list
+
+switch_labels : switch_label
+	| switch_labels   switch_label
+
+switch_label : case  constant_expression  ':'
+	| default  ':'
 
 
 

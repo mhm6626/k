@@ -40,14 +40,10 @@ const dict = {
     R_PAREN: ')',
     L_BRACKET: '[',
     R_BRACKET: ']',
-    L_BRACE: '{',
-    R_BRACE: '}',
     COMMA: ',',
     PERIOD: '.',
     SEMI: ';',
-    COLON: ':',
-
-    INT : 'int'
+    COLON: ':'
 
 };
 var rulesAddition = '';
@@ -91,14 +87,14 @@ function Stm(st) {
             var s1 = s.substr(0, s.length - 3);
             s = s1 + '-opt';
             rulesAddition += s + ':\n' + s1 + '\nempty\n'
-        } else {
+        } /*else {
             for (var key in dict) {
                 if (dict[key] == s) {
                     s = key;
                     break;
                 }
             }
-        }
+        }*/
 
         o += s + '  ';
     }

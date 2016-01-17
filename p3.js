@@ -143,14 +143,16 @@ for (var line of lines) {
         if (/^\w+(-\w+)*:$/.test(line)) {
             len = line.length;
             isDef = true;
-            out += '' + line + '';
+            var def  = line.substr(0, len - 1); 
+            out += '    """\n    pass\ndef p_' + def + '(p):\n    """\n';
+            out += '    ' + def + ' :';
         } else {
             if (isDef) {
                 out += " " + Stm(line) + '\n';
                 isDef = false;
             } else {
                 
-                out += ' '.repeat(len) + "| "+  Stm(line) + '\n';
+                out += '    '+' '.repeat(len) + "| "+  Stm(line) + '\n';
             }
         }
     }
